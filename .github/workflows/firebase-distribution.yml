@@ -7,10 +7,11 @@ on:
 
 jobs:
   distribute:
+    name: Build & Upload APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Java
@@ -22,10 +23,20 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.35.0"
+          flutter-version: "3.35.5"
+          cache: true
 
-      - name: Install dependencies
+      - name: Verify Flutter Version
+        run: flutter --version
+
+      - name: Install Dependencies
         run: flutter pub get
+
+      - name: Flutter Analyze
+        run: flutter analyze
+
+      - name: Run Tests
+        run: flutter test
 
       - name: Build Release APK
         run: flutter build apk --release
@@ -39,3 +50,6 @@ jobs:
           file: build/app/outputs/flutter-apk/app-release.apk
           releaseNotes: |
             Automated build from GitHub Actions
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
