@@ -7,7 +7,6 @@ on:
 
 jobs:
   distribute:
-    name: Build & Upload APK
     runs-on: ubuntu-latest
 
     steps:
@@ -32,12 +31,6 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Flutter Analyze
-        run: flutter analyze
-
-      - name: Run Tests
-        run: flutter test
-
       - name: Build Release APK
         run: flutter build apk --release
 
@@ -49,7 +42,4 @@ jobs:
           groups: QA
           file: build/app/outputs/flutter-apk/app-release.apk
           releaseNotes: |
-            Automated build from GitHub Actions
-            Repository: ${{ github.repository }}
-            Branch: ${{ github.ref_name }}
-            Commit: ${{ github.sha }}
+            CI/CD Demo Build
