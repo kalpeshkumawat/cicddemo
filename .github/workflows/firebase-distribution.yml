@@ -65,6 +65,14 @@ jobs:
       - name: Build Release APK
         run: flutter build apk --release
 
+      # Upload APK as GitHub Artifact
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
+
       # Upload APK to Firebase App Distribution
       - name: Upload APK to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
