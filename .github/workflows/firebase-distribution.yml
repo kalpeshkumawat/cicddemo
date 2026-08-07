@@ -64,6 +64,10 @@ jobs:
       # Build Release APK
       - name: Build Release APK
         run: flutter build apk --release
+      
+      # Build Release AAB
+      - name: Build Release AAB
+        run: flutter build appbundle --release
 
       # Upload APK as GitHub Artifact
       - name: Upload APK Artifact
@@ -71,6 +75,14 @@ jobs:
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
+
+      # Upload AAB Artifact
+      - name: Upload AAB Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
           retention-days: 7
 
       # Upload APK to Firebase App Distribution
