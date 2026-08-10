@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'CI/CD Demo',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Firebase App Connected'),
+          title: const Text('QA Build'),
         ),
         body: const Center(
           child: Text('Firebase Initialized Successfully'),
